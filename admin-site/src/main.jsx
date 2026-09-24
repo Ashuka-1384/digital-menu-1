@@ -50,6 +50,7 @@ function App() {
   const [categoryManagerOpen, setCategoryManagerOpen] = useState(false)
   const [newCategoryName, setNewCategoryName] = useState('')
   const [categoryError, setCategoryError] = useState('')
+  const [deleteCategoryTarget, setDeleteCategoryTarget] = useState(null)
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState('all')
   const [status, setStatus] = useState('')
@@ -221,22 +222,42 @@ function App() {
     const category = menu.categories.find(item => item.id === id)
     if (!category) return
 
-    const used = menu.items.some(item => item.categoryId === id)
-    if (used) {
-      setCategoryError(`دسته «${category.name}» آیتم دارد؛ ابتدا آیتم‌ها را به دسته دیگری منتقل کنید.`)
+    if (menu.categories.length <= 1) {
+      setCategoryError('حداقل یک دسته‌بندی باید در منو باقی بماند.')
       return
     }
 
-    if (!window.confirm(`دسته «${category.name}» حذف شود؟`)) return
+    const affectedItems = menu.items.filter(item => item.categoryId === id)
+    setDeleteCategoryTarget({
+      category,
+      affectedCount: affectedItems.length,
+      moveTo: menu.categories.find(item => item.id !== id)?.id || '',
+    })
+    setCategoryError('')
+  }
+
+  const confirmDeleteCategory = targetId => {
+    if (!deleteCategoryTarget) return
+
+    const { category } = deleteCategoryTarget
+    if (!targetId || targetId === category.id) {
+      setCategoryError('یک دسته مقصد برای آیتم‌های این دسته انتخاب کنید.')
+      return
+    }
 
     setMenu(current => ({
       ...current,
-      categories: categorySort(current.categories.filter(item => item.id !== id))
+      categories: categorySort(current.categories.filter(item => item.id !== category.id))
         .map((item, index) => ({ ...item, sort: index + 1 })),
+      items: current.items.map(item =>
+        item.categoryId === category.id ? { ...item, categoryId: targetId } : item,
+      ),
     }))
-    if (filter === id) setFilter('all')
+
+    if (filter === category.id) setFilter(targetId)
+    setDeleteCategoryTarget(null)
     setCategoryError('')
-    setStatus('دسته‌بندی حذف شد؛ ذخیره را بزنید')
+    setStatus(`دسته «${category.name}» حذف شد؛ آیتم‌های آن منتقل شدند`)
   }
 
   const save = async () => {
@@ -578,6 +599,15 @@ function App() {
           }}
         />
       )}
+
+      {deleteCategoryTarget && (
+        <CategoryDeleteModal
+          target={deleteCategoryTarget}
+          categories={categorySort(menu.categories)}
+          onClose={() => setDeleteCategoryTarget(null)}
+          onConfirm={confirmDeleteCategory}
+        />
+      )}
     </div>
   )
 }
@@ -813,12 +843,7 @@ function CategoryManager({
               <button
                 className="category-delete"
                 onClick={() => onDelete(category.id)}
-                disabled={(categoryCounts[category.id] || 0) > 0}
-                title={
-                  (categoryCounts[category.id] || 0) > 0
-                    ? 'ابتدا آیتم‌های این دسته را منتقل کنید'
-                    : 'حذف دسته'
-                }
+                title="حذف دسته"
               >
                 <Trash2 size={15} />
               </button>
@@ -832,6 +857,62 @@ function CategoryManager({
             بستن
           </button>
         </footer>
+      </section>
+    </div>
+  )
+}
+
+function CategoryDeleteModal({ target, categories, onClose, onConfirm }) {
+  const alternatives = categories.filter(category => category.id !== target.category.id)
+  const [moveTo, setMoveTo] = useState(
+    target.moveTo || alternatives[0]?.id || '',
+  )
+
+  return (
+    <div
+      className="manager-backdrop delete-backdrop"
+      onMouseDown={event => {
+        if (event.target === event.currentTarget) onClose()
+      }}
+    >
+      <section className="delete-modal" role="dialog" aria-modal="true" aria-label="حذف دسته‌بندی">
+        <div className="delete-icon" aria-hidden="true">
+          <Trash2 size={18} />
+        </div>
+
+        <span className="eyebrow">تغییر ساختار منو</span>
+        <h2>حذف «{target.category.name}»</h2>
+
+        {target.affectedCount > 0 ? (
+          <>
+            <p>
+              این دسته <strong>{target.affectedCount.toLocaleString('fa-IR')} آیتم</strong> دارد.
+              قبل از حذف، آیتم‌ها را به یک دسته دیگر منتقل کنید تا اطلاعات منو از بین نرود.
+            </p>
+
+            <label className="delete-select-label">
+              انتقال آیتم‌ها به
+              <select value={moveTo} onChange={event => setMoveTo(event.target.value)}>
+                {alternatives.map(category => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </>
+        ) : (
+          <p>این دسته خالی است و می‌توانید آن را حذف کنید.</p>
+        )}
+
+        <div className="delete-actions">
+          <button type="button" className="delete-cancel" onClick={onClose}>
+            انصراف
+          </button>
+          <button type="button" className="delete-confirm" onClick={() => onConfirm(moveTo)}>
+            حذف دسته
+          </button>
+        </div>
       </section>
     </div>
   )

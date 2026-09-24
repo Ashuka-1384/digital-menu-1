@@ -7,12 +7,13 @@ import { CONTENT_RAW_BASE } from './site-config'
 const FALLBACK = '/fallback-menu.json'
 const MENU_API = '/api/menu'
 const RAW_BASE = CONTENT_RAW_BASE.replace(/\/$/, '')
-const CACHE_KEY = 'digital-menu-cache-v6'
+const CACHE_KEY = 'digital-menu-cache-v7'
 const REQUEST_TIMEOUT = 4500
 const MIN_REFRESH_GAP = 3000
 
 function formatPrice(value, currency = 'تومان') {
-  return `${Number(value || 0).toLocaleString('fa-IR')} ${currency}`
+  const numeric = Number(value || 0)
+  return `${numeric.toLocaleString('fa-IR')} ${currency}`
 }
 
 function imageUrl(path) {
@@ -37,7 +38,7 @@ function writeCachedMenu(data) {
   try {
     localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), data }))
   } catch {
-    // Storage is optional; the live API remains the source of truth.
+    // localStorage is optional.
   }
 }
 
@@ -61,10 +62,9 @@ async function fetchJson(url, options = {}) {
 function App() {
   const [menu, setMenu] = useState(null)
   const [active, setActive] = useState('all')
-  const [query, setQuery] = useState('')
   const [loading, setLoading] = useState(true)
   const [selectedItem, setSelectedItem] = useState(null)
-  const searchInputRef = useRef(null)
+  const categoryRefs = useRef({})
 
   useEffect(() => {
     let alive = true
@@ -124,10 +124,7 @@ function App() {
 
   const categories = useMemo(() => {
     if (!menu) return []
-    return [
-      { id: 'all', name: 'همه' },
-      ...[...menu.categories].sort((a, b) => a.sort - b.sort),
-    ]
+    return [...menu.categories].sort((a, b) => Number(a.sort || 0) - Number(b.sort || 0))
   }, [menu])
 
   const categoryMap = useMemo(() => {
@@ -139,173 +136,156 @@ function App() {
     if (!menu) return []
     return [...menu.items]
       .filter(item => item.available !== false)
-      .sort((a, b) => a.sort - b.sort)
+      .sort((a, b) => {
+        const bySort = Number(a.sort || 0) - Number(b.sort || 0)
+        return bySort || String(a.name).localeCompare(String(b.name), 'fa')
+      })
   }, [menu])
 
   const visibleItems = useMemo(() => {
-    const term = query.trim().toLocaleLowerCase('fa-IR')
-
-    return availableItems.filter(item => {
-      const matchesCategory = active === 'all' || item.categoryId === active
-      const searchable = `${item.name} ${item.description}`.toLocaleLowerCase('fa-IR')
-      return matchesCategory && (!term || searchable.includes(term))
-    })
-  }, [active, query, availableItems])
+    if (active === 'all') return availableItems
+    return availableItems.filter(item => item.categoryId === active)
+  }, [active, availableItems])
 
   const activeCategoryName =
     categories.find(category => category.id === active)?.name || 'همه'
 
-  const focusSearch = () => {
-    searchInputRef.current?.focus()
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+  const selectCategory = id => {
+    setActive(id)
+    window.requestAnimationFrame(() => {
+      categoryRefs.current[id]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    })
   }
 
   if (loading) {
     return (
-      <div className="loading-shell">
-        <div className="loading-mark"><span /></div>
-        <span>در حال آماده‌سازی</span>
+      <div className="loading-shell" aria-live="polite">
+        <div className="loading-ornament" aria-hidden="true">
+          <span />
+        </div>
       </div>
     )
   }
 
   if (!menu) {
-    return <div className="loading-shell">منو در دسترس نیست.</div>
+    return <div className="loading-shell loading-error">منو در دسترس نیست.</div>
   }
 
   return (
     <div className="site-shell">
       <div className="menu-frame">
-        <header className="minimal-header">
-          <div className="header-rule" />
-          <span className="header-kicker">منو</span>
-          <div className="header-rule header-rule-right" />
+        <header className="menu-top" aria-hidden="true">
+          <span className="top-line" />
+          <span className="top-diamond" />
+          <span className="top-line" />
         </header>
 
-        <main>
-          <section className="controls" aria-label="جست‌وجو و دسته‌بندی">
-            <label className="search-box">
-              <input
-                ref={searchInputRef}
-                value={query}
-                onChange={event => setQuery(event.target.value)}
-                placeholder="جست‌وجو در منو"
-                aria-label="جست‌وجو در منو"
-                inputMode="search"
-              />
-              {query && (
-                <button
-                  type="button"
-                  className="clear-search"
-                  onClick={() => setQuery('')}
-                  aria-label="پاک کردن جست‌وجو"
-                >
-                  <X size={15} />
-                </button>
-              )}
-            </label>
+        <nav className="category-strip" aria-label="دسته‌بندی‌ها">
+          <button
+            type="button"
+            className={active === 'all' ? 'category-chip active' : 'category-chip'}
+            onClick={() => setActive('all')}
+            aria-pressed={active === 'all'}
+          >
+            همه
+          </button>
 
-            <nav className="category-nav" aria-label="دسته‌بندی‌ها">
-              {categories.map(category => (
-                <button
+          {categories.map(category => (
+            <button
+              key={category.id}
+              type="button"
+              className={active === category.id ? 'category-chip active' : 'category-chip'}
+              onClick={() => selectCategory(category.id)}
+              aria-pressed={active === category.id}
+            >
+              {category.name}
+            </button>
+          ))}
+        </nav>
+
+        <main className="menu-content">
+          {active === 'all' ? (
+            categories.map(category => {
+              const items = availableItems.filter(item => item.categoryId === category.id)
+              if (!items.length) return null
+
+              return (
+                <section
+                  className="menu-section"
                   key={category.id}
-                  type="button"
-                  className={
-                    active === category.id
-                      ? 'category-button active'
-                      : 'category-button'
-                  }
-                  onClick={() => setActive(category.id)}
-                  aria-pressed={active === category.id}
+                  ref={node => {
+                    categoryRefs.current[category.id] = node
+                  }}
                 >
-                  {category.name}
-                </button>
-              ))}
-            </nav>
-          </section>
+                  <div className="section-title">
+                    <span className="section-mark" aria-hidden="true" />
+                    <h1>{category.name}</h1>
+                    <span className="section-line" aria-hidden="true" />
+                  </div>
 
-          <section className="section-head">
-            <div>
-              <span>{query ? 'جست‌وجو' : 'انتخاب شما'}</span>
-              <h1>{query ? 'نتیجه‌ها' : activeCategoryName}</h1>
-            </div>
-            <small>{visibleItems.length.toLocaleString('fa-IR')} آیتم</small>
-          </section>
-
-          {visibleItems.length > 0 ? (
-            <section className="menu-list" aria-live="polite">
-              {visibleItems.map((item, index) => (
-                <article
-                  className="menu-card"
-                  key={item.id}
-                  style={{ '--card-index': index }}
-                >
-                  <button
-                    type="button"
-                    className="card-button"
-                    onClick={() => setSelectedItem(item)}
-                    aria-label={`جزئیات ${item.name}`}
-                  >
-                    <div className="card-image">
-                      {item.image ? (
-                        <img
-                          src={imageUrl(item.image)}
-                          alt=""
-                          loading={index < 3 ? 'eager' : 'lazy'}
-                          decoding="async"
-                          fetchPriority={index === 0 ? 'high' : 'auto'}
-                        />
-                      ) : (
-                        <div className="image-placeholder" aria-hidden="true">
-                          <span>منو</span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="card-body">
-                      <div className="card-topline">
-                        <h2>{item.name}</h2>
-                        <strong>{formatPrice(item.price, menu.currency)}</strong>
-                      </div>
-                      <p>{item.description}</p>
-                      <span className="card-category">
-                        {categoryMap[item.categoryId] || 'منو'}
-                      </span>
-                    </div>
-                  </button>
-                </article>
-              ))}
-            </section>
+                  <div className="menu-items">
+                    {items.map((item, index) => (
+                      <MenuItem
+                        key={item.id}
+                        item={item}
+                        categoryName={category.name}
+                        currency={menu.currency}
+                        index={index}
+                        onOpen={() => setSelectedItem(item)}
+                      />
+                    ))}
+                  </div>
+                </section>
+              )
+            })
           ) : (
-            <div className="empty-state">
-              <strong>موردی پیدا نشد</strong>
-              <p>دسته‌بندی یا عبارت دیگری را امتحان کنید.</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setQuery('')
-                  setActive('all')
-                }}
-              >
-                نمایش همه
-              </button>
-            </div>
+            <section
+              className="menu-section active-section"
+              ref={node => {
+                categoryRefs.current[active] = node
+              }}
+            >
+              <div className="section-title">
+                <span className="section-mark" aria-hidden="true" />
+                <h1>{activeCategoryName}</h1>
+                <span className="section-line" aria-hidden="true" />
+              </div>
+
+              {visibleItems.length > 0 ? (
+                <div className="menu-items">
+                  {visibleItems.map((item, index) => (
+                    <MenuItem
+                      key={item.id}
+                      item={item}
+                      categoryName={categoryMap[item.categoryId] || activeCategoryName}
+                      currency={menu.currency}
+                      index={index}
+                      onOpen={() => setSelectedItem(item)}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="empty-state">
+                  <strong>این دسته هنوز آیتمی ندارد</strong>
+                  <span>برای این دسته، آیتم جدیدی در منوی مدیریت ثبت نشده است.</span>
+                </div>
+              )}
+            </section>
           )}
         </main>
 
         {(menu.restaurant.phone || menu.restaurant.instagram) && (
-          <footer className="footer">
-            <button type="button" className="footer-caption" onClick={focusSearch}>
-              بازگشت به منو
-            </button>
-
+          <footer className="menu-footer">
+            <div className="footer-rule" />
             <div className="footer-actions">
               {menu.restaurant.phone && (
                 <a href={`tel:${menu.restaurant.phone}`} aria-label="تماس">
-                  <Phone size={16} />
+                  <Phone size={17} />
                 </a>
               )}
-
               {menu.restaurant.instagram && (
                 <a
                   href={menu.restaurant.instagram}
@@ -313,7 +293,7 @@ function App() {
                   rel="noreferrer"
                   aria-label="اینستاگرام"
                 >
-                  <Instagram size={16} />
+                  <Instagram size={17} />
                 </a>
               )}
             </div>
@@ -345,9 +325,15 @@ function App() {
 
             <div className="modal-image">
               {selectedItem.image ? (
-                <img src={imageUrl(selectedItem.image)} alt="" decoding="async" />
+                <img
+                  src={imageUrl(selectedItem.image)}
+                  alt=""
+                  decoding="async"
+                />
               ) : (
-                <div className="modal-placeholder"><span>منو</span></div>
+                <div className="modal-placeholder" aria-hidden="true">
+                  <span />
+                </div>
               )}
             </div>
 
@@ -361,7 +347,9 @@ function App() {
                 <strong>{formatPrice(selectedItem.price, menu.currency)}</strong>
               </div>
 
-              <p>{selectedItem.description || 'توضیحی برای این آیتم ثبت نشده است.'}</p>
+              <p>
+                {selectedItem.description || 'توضیحی برای این آیتم ثبت نشده است.'}
+              </p>
 
               <button
                 type="button"
@@ -375,6 +363,48 @@ function App() {
         </div>
       )}
     </div>
+  )
+}
+
+function MenuItem({ item, categoryName, currency, index, onOpen }) {
+  return (
+    <article
+      className="menu-item"
+      style={{ '--item-index': index }}
+    >
+      <button
+        type="button"
+        className="item-button"
+        onClick={onOpen}
+        aria-label={`جزئیات ${item.name}`}
+      >
+        <div className="item-image-wrap">
+          {item.image ? (
+            <img
+              src={imageUrl(item.image)}
+              alt=""
+              loading={index < 4 ? 'eager' : 'lazy'}
+              decoding="async"
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+            />
+          ) : (
+            <div className="image-placeholder" aria-hidden="true">
+              <span />
+            </div>
+          )}
+        </div>
+
+        <div className="item-copy">
+          <div className="item-heading">
+            <h2>{item.name}</h2>
+            <span className="item-price">{formatPrice(item.price, currency)}</span>
+          </div>
+
+          <p>{item.description}</p>
+          <span className="item-category">{categoryName}</span>
+        </div>
+      </button>
+    </article>
   )
 }
 
