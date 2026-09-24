@@ -12,9 +12,25 @@
       "id": "desserts",
       "name": "دسته پیش فرض",
       "sort": 1
+    },
+    {
+      "id": "category-mug5tsca-z22ab",
+      "name": "دسته دوم",
+      "sort": 2
     }
   ],
   "items": [
+    {
+      "id": "item-mug5tv0t-kfqgk",
+      "categoryId": "category-mug5tsca-z22ab",
+      "name": "آیتم پیش فرض سوم ",
+      "description": "متن برای تست اولیه",
+      "price": 100,
+      "image": "content/images/mug5v7q9-11199.jpg",
+      "featured": false,
+      "available": true,
+      "sort": 3
+    },
     {
       "id": "item-mug54q7w-hp4cl",
       "categoryId": "desserts",
@@ -38,5 +54,5 @@
       "sort": 1
     }
   ],
-  "updatedAt": "2026-09-24T23:06:14.558Z"
+  "updatedAt": "2026-09-24T23:26:56.072Z"
 }
