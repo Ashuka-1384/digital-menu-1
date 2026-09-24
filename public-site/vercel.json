@@ -1,8 +1,16 @@
 {
+  "functions": {
+    "api/*.mjs": { "maxDuration": 10 }
+  },
   "headers": [
     {
       "source": "/assets/(.*)",
-      "headers": [{"key":"Cache-Control","value":"public, max-age=31536000, immutable"}]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }
