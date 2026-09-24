@@ -31,6 +31,28 @@
   ],
   "items": [
     {
+      "id": "item-mug2vkrq-8d4bs",
+      "categoryId": "starters",
+      "name": "آیتم جدید",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 7
+    },
+    {
+      "id": "item-mug2vg1y-rdkvd",
+      "categoryId": "starters",
+      "name": "آیتم جدید",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 6
+    },
+    {
       "id": "item-olive",
       "categoryId": "starters",
       "name": "زیتون مزه‌دار",
@@ -86,5 +108,5 @@
       "sort": 1
     }
   ],
-  "updatedAt": "2026-09-24T21:44:54.754Z"
+  "updatedAt": "2026-09-24T22:03:04.789Z"
 }
