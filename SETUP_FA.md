@@ -74,7 +74,7 @@ CONTENT_RAW_BASE (داخل site-config.js)=https://raw.githubusercontent.com/OWN
 
 ## عیب‌یابی نسخه اصلاح‌شده
 
-### Admin روی حالت preview می‌ماند
+### Admin به API وصل نمی‌شود
 در Vercel Project مربوط به admin باید این Environment Variableها دقیقاً وجود داشته باشند و برای Production فعال باشند:
 - GITHUB_TOKEN
 - GITHUB_OWNER

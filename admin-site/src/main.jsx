@@ -11,8 +11,6 @@ import {
   RefreshCw,
   Save,
   Search,
-  Sparkles,
-  Star,
   Trash2,
   Upload,
   Utensils,
@@ -23,6 +21,7 @@ import seed from './seed.json'
 import { CONTENT_RAW_BASE } from './site-config'
 
 const RAW_BASE = CONTENT_RAW_BASE.replace(/\/$/, '')
+const PUBLIC_MENU_URL = 'https://digital-menu-public-six.vercel.app/'
 const headers = () => ({ 'Content-Type': 'application/json' })
 
 function imgUrl(path) {
@@ -75,7 +74,7 @@ function App() {
     return menu.items
       .filter(item => filter === 'all' || item.categoryId === filter)
       .filter(item => !term || `${item.name} ${item.description}`.toLocaleLowerCase('fa-IR').includes(term))
-      .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0) || a.sort - b.sort)
+      .sort((a, b) => a.sort - b.sort)
   }, [menu, filter, query])
 
   const categoryName = id => menu.categories.find(c => c.id === id)?.name || 'بدون دسته'
@@ -202,8 +201,7 @@ function App() {
 
         <div className="nav-group">
           <span className="nav-label">بخش‌ها</span>
-          <button className="nav-item active"><Sparkles size={17} /> آیتم‌های منو</button>
-          <button className="nav-item" onClick={() => window.open('/', '_blank')}><Eye size={17} /> پیش‌نمایش</button>
+          <button className="nav-item active"><Utensils size={17} /> آیتم‌های منو</button>
         </div>
 
         <div className="sidebar-bottom">
@@ -212,7 +210,7 @@ function App() {
             <strong>{status || 'آماده'}</strong>
             <small>منبع داده: content/menu.json</small>
           </div>
-          <button className="preview-link" onClick={() => window.open('/', '_blank')}><Eye size={16} /> مشاهده منو</button>
+          <a className="public-menu-link" href={PUBLIC_MENU_URL}><Eye size={16} /> مشاهده منو</a>
         </div>
       </aside>
 
@@ -232,7 +230,7 @@ function App() {
         <section className="stats">
           <div className="stat-card"><span>کل آیتم‌ها</span><strong>{menu.items.length.toLocaleString('fa-IR')}</strong><small>در مخزن</small></div>
           <div className="stat-card"><span>قابل نمایش</span><strong>{menu.items.filter(item => item.available !== false).length.toLocaleString('fa-IR')}</strong><small>در منوی عمومی</small></div>
-          <div className="stat-card"><span>پیشنهاد ویژه</span><strong>{menu.items.filter(item => item.featured).length.toLocaleString('fa-IR')}</strong><small>برجسته شده</small></div>
+          <div className="stat-card"><span>دسته‌ها</span><strong>{menu.categories.length.toLocaleString('fa-IR')}</strong><small>در منو</small></div>
         </section>
 
         <section className="content-toolbar">
@@ -259,7 +257,6 @@ function App() {
               <article className="item-row" key={item.id} style={{ '--row-index': index }}>
                 <div className="thumb">
                   {item.image ? <img src={imgUrl(item.image)} alt="" loading={index < 3 ? 'eager' : 'lazy'} /> : <ImageIcon size={22} />}
-                  {item.featured && <span className="thumb-star"><Star size={11} fill="currentColor" /></span>}
                 </div>
                 <div className="item-main">
                   <div className="item-head"><h3>{item.name}</h3><span className="cat">{categoryName(item.categoryId)}</span></div>
@@ -278,8 +275,7 @@ function App() {
         )}
 
         <div className="mobile-actions">
-          <button onClick={() => window.open('/', '_blank')}><Eye size={18} /> پیش‌نمایش</button>
-          <button onClick={save} disabled={saving}><Save size={18} /> ذخیره</button>
+          <button onClick={save} disabled={saving}><Save size={18} /> ذخیره تغییرات</button>
         </div>
       </main>
 
@@ -335,14 +331,10 @@ function Drawer({ item, categories, onClose, onChange, onUpload, onRemoveImage }
           </div>
           <label>توضیحات<textarea rows="4" value={local.description} onChange={event => patch({ description: event.target.value })} /></label>
 
-          <div className="setting-grid">
+          <div className="setting-grid single">
             <button className={local.available !== false ? 'toggle active' : 'toggle'} onClick={() => patch({ available: local.available === false })}>
               {local.available !== false ? <Eye size={16} /> : <EyeOff size={16} />}
               {local.available !== false ? 'نمایش در منو' : 'پنهان از منو'}
-            </button>
-            <button className={local.featured ? 'toggle active' : 'toggle'} onClick={() => patch({ featured: !local.featured })}>
-              <Star size={16} fill={local.featured ? 'currentColor' : 'none'} />
-              {local.featured ? 'پیشنهاد ویژه' : 'عادی'}
             </button>
           </div>
 
