@@ -31,6 +31,17 @@
   ],
   "items": [
     {
+      "id": "item-mug51wro-dnc7z",
+      "categoryId": "starters",
+      "name": "آیتم جدید",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "content/images/mug522b8-photo_1_2026-09-24_02-43-23.jpg",
+      "featured": false,
+      "available": true,
+      "sort": 6
+    },
+    {
       "id": "item-olive",
       "categoryId": "starters",
       "name": "زیتون مزه‌دار",
@@ -86,5 +97,5 @@
       "sort": 1
     }
   ],
-  "updatedAt": "2026-09-24T23:03:36.467Z"
+  "updatedAt": "2026-09-24T23:04:01.495Z"
 }
