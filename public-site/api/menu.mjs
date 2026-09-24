@@ -33,7 +33,7 @@ export default async function handler(req, res) {
         Accept: 'application/vnd.github.raw+json',
         Authorization: `Bearer ${token}`,
         'X-GitHub-Api-Version': '2026-03-10',
-        'User-Agent': 'noma-public-menu'
+        'User-Agent': 'digital-menu-public'
       },
       cache: 'no-store',
       signal: controller.signal

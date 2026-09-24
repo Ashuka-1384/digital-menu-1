@@ -1,41 +1,55 @@
-# Premium Digital Menu — Vercel + JSON/File Storage
+# منوی دیجیتال — Vercel + GitHub Content API
 
-A simple bilingual-ready (RTL-first) digital menu built with React, Vite and Vercel Node functions. No database.
+یک منوی دیجیتال RTL-first ساخته‌شده با React، Vite و Vercel. داده‌ها و تصاویر داخل repository نگهداری می‌شوند و پنل مدیریت، فایل محتوا را از طریق GitHub Contents API به‌روزرسانی می‌کند.
 
-## Structure
-
-- `content/menu.json` — menu data
-- `content/images/` — uploaded images (tracked in Git)
-- `public-site/` — customer-facing read-only menu
-- `admin-site/` — admin editor (no login; access is intended to be hidden behind a separate/private URL)
-
-Both projects can be deployed as separate Vercel projects from the same repository.
-
-## Why Git-backed storage instead of writing directly to disk?
-
-Vercel Functions run on ephemeral/serverless infrastructure, so changes written to the local filesystem are not a reliable permanent storage mechanism. The admin API therefore updates `content/menu.json` and `content/images/*` through the GitHub Contents API. The repository becomes the source of truth without adding a database.
-
-## Required environment variables for `admin-site`
+## ساختار
 
 ```text
-GITHUB_TOKEN=github_pat_xxxxxxxxx
-GITHUB_OWNER=your-github-user-or-org
-GITHUB_REPO=your-repo-name
+content/menu.json
+content/images/
+public-site/
+admin-site/
+```
+
+`public-site` نسخه عمومی منو است و `admin-site` برای مدیریت آیتم‌ها استفاده می‌شود. هر دو می‌توانند به‌صورت دو پروژه مستقل Vercel از همین repository منتشر شوند.
+
+## طراحی جدید
+
+ظاهر هر دو بخش از پایه بازطراحی شده است:
+
+- رابط عمومی با تمرکز روی غذاها، قیمت و دسته‌بندی‌ها، بدون هویت برند یا نام نمایشی.
+- طراحی mobile-first با کارت‌های یک‌ستونه در موبایل، دو ستون در تبلت و سه ستون در دسکتاپ.
+- دسته‌بندی افقی قابل لمس، جست‌وجوی سریع و modal سبک برای جزئیات هر آیتم.
+- انیمیشن‌ها فقط با CSS و transitionهای کوتاه پیاده‌سازی شده‌اند و برای `prefers-reduced-motion` نیز رفتار مناسب دارند.
+- تصاویر lazy-load می‌شوند و پنل مدیریت قبل از ارسال، تصاویر را به WebP فشرده می‌کند.
+- هیچ کتابخانه انیمیشن سنگینی اضافه نشده است.
+
+## محیط Admin
+
+توکن محرمانه فقط باید در Environment Variables پنل Admin نگهداری شود:
+
+```text
+GITHUB_TOKEN=...
+GITHUB_OWNER=...
+GITHUB_REPO=...
 GITHUB_BRANCH=main
-ADMIN_API_KEY=optional-but-recommended-secret
 ```
 
-در نسخهٔ فعلی عمداً لاگین یا پسورد نداریم؛ بنابراین هر کسی که URL پنل ادمین را بداند می‌تواند محتوا را تغییر دهد. برای این مدل، یک دامنه/URL طولانی و خصوصی برای پنل ادمین استفاده کنید.
+توکن را در کد، فایل `.env` قابل commit یا پروژه عمومی قرار ندهید.
 
-## Required environment variables for `public-site`
+## تنظیمات مخزن
+
+اطلاعات عمومی repository در این فایل‌ها قرار دارند:
 
 ```text
-CONTENT_RAW_BASE (داخل site-config.js)=https://raw.githubusercontent.com/OWNER/REPO/main/content
+public-site/src/site-config.js
+admin-site/src/site-config.js
+admin-site/api/repo-config.mjs
 ```
 
-The public site only reads `menu.json` and image files. No secret should be added to the public project.
+این اطلاعات محرمانه نیستند. توکن GitHub محرمانه است و در این فایل‌ها قرار نمی‌گیرد.
 
-## Local development
+## اجرای محلی
 
 ### Public
 
@@ -53,45 +67,34 @@ npm install
 npm run dev
 ```
 
-For local admin API calls, run the admin project with Vercel CLI (`vercel dev`) so the `/api/*` functions are available.
+برای اجرای توابع `/api/*` در توسعه، استفاده از `vercel dev` توصیه می‌شود.
 
-## Vercel deployment
+## انتشار در Vercel
 
-Deploy `public-site` and `admin-site` as separate Vercel projects, both pointing at this same repository and using the appropriate Root Directory.
+برای نسخه عمومی، Root Directory را روی `public-site` قرار دهید.
 
-Suggested domains:
+برای پنل مدیریت، Root Directory را روی `admin-site` قرار دهید.
 
-- `menu.example.com` → `public-site`
-- `manage-<random>.example.com` → `admin-site`
+هر دو پروژه از همان repository استفاده می‌کنند اما deployment مستقل دارند.
 
-The admin site has no authentication flow by design. Treat the admin URL as a secret and do not share it publicly.
+## ساختار داده
 
-## Content schema
+فایل `content/menu.json` ساختار زیر را حفظ می‌کند:
 
 ```json
 {
   "restaurant": {
-    "name": "Sample Restaurant",
-    "tagline": "Taste the moment",
-    "description": "..."
+    "name": "",
+    "tagline": "...",
+    "description": "...",
+    "phone": "",
+    "instagram": ""
   },
   "currency": "تومان",
-  "categories": [
-    { "id": "starters", "name": "پیش‌غذا", "sort": 1 }
-  ],
-  "items": [
-    {
-      "id": "item-id",
-      "categoryId": "starters",
-      "name": "...",
-      "description": "...",
-      "price": 250000,
-      "image": "images/item-id-123.jpg",
-      "featured": true,
-      "available": true,
-      "sort": 1
-    }
-  ],
-  "updatedAt": "2026-09-24T00:00:00.000Z"
+  "categories": [],
+  "items": [],
+  "updatedAt": "..."
 }
 ```
+
+فیلد `restaurant.name` برای سازگاری با schema نگه داشته شده اما در رابط عمومی و پنل مدیریت نمایش داده نمی‌شود.

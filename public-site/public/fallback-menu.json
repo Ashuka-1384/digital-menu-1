@@ -1,5 +1,5 @@
 {
-  "restaurant": {"name":"NOMA","tagline":"طعم خوب، حال خوب","description":"منویی ساده و خوش‌طعم برای انتخابی که هر بار درست می‌نشیند.","phone":"","instagram":""},
+  "restaurant": {"name":"","tagline":"طعم خوب، حال خوب","description":"منویی ساده و خوش‌طعم برای انتخابی که هر بار درست می‌نشیند.","phone":"","instagram":""},
   "currency":"تومان",
   "categories":[
     {"id":"starters","name":"پیش‌غذا","sort":1},
