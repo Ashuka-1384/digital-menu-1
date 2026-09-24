@@ -1,22 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import {
-  ArrowUpLeft,
-  ChevronDown,
-  Instagram,
-  Phone,
-  Search,
-  Utensils,
-  X,
-} from 'lucide-react'
+import { Instagram, Phone, X } from 'lucide-react'
 import './styles.css'
 import { CONTENT_RAW_BASE } from './site-config'
 
 const FALLBACK = '/fallback-menu.json'
 const MENU_API = '/api/menu'
 const RAW_BASE = CONTENT_RAW_BASE.replace(/\/$/, '')
-const CACHE_KEY = 'digital-menu-cache-v5'
-const REQUEST_TIMEOUT = 4000
+const CACHE_KEY = 'digital-menu-cache-v6'
+const REQUEST_TIMEOUT = 4500
 const MIN_REFRESH_GAP = 3000
 
 function formatPrice(value, currency = 'تومان') {
@@ -45,7 +37,7 @@ function writeCachedMenu(data) {
   try {
     localStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), data }))
   } catch {
-    // Local storage can be unavailable in private/restricted browsers.
+    // Storage is optional; the live API remains the source of truth.
   }
 }
 
@@ -80,7 +72,9 @@ function App() {
     let inFlight = null
 
     const applyMenu = next => {
-      if (!next?.items || !next?.categories || !next?.restaurant) throw new Error('Invalid menu payload')
+      if (!next?.items || !next?.categories || !next?.restaurant) {
+        throw new Error('Invalid menu payload')
+      }
       if (!alive) return
       setMenu(next)
       setLoading(false)
@@ -91,6 +85,7 @@ function App() {
       const now = Date.now()
       if (inFlight || now - lastRefreshAt < MIN_REFRESH_GAP) return
       lastRefreshAt = now
+
       inFlight = (async () => {
         try {
           const response = await fetchJson(MENU_API, { cache: 'no-store' })
@@ -108,6 +103,7 @@ function App() {
           inFlight = null
         }
       })()
+
       await inFlight
     }
 
@@ -119,6 +115,7 @@ function App() {
 
     refresh()
     const timer = window.setInterval(refresh, 60000)
+
     return () => {
       alive = false
       window.clearInterval(timer)
@@ -138,7 +135,7 @@ function App() {
     return Object.fromEntries(menu.categories.map(category => [category.id, category.name]))
   }, [menu])
 
-  const allAvailableItems = useMemo(() => {
+  const availableItems = useMemo(() => {
     if (!menu) return []
     return [...menu.items]
       .filter(item => item.available !== false)
@@ -147,20 +144,27 @@ function App() {
 
   const visibleItems = useMemo(() => {
     const term = query.trim().toLocaleLowerCase('fa-IR')
-    return allAvailableItems.filter(item => {
+
+    return availableItems.filter(item => {
       const matchesCategory = active === 'all' || item.categoryId === active
       const searchable = `${item.name} ${item.description}`.toLocaleLowerCase('fa-IR')
       return matchesCategory && (!term || searchable.includes(term))
     })
-  }, [active, query, allAvailableItems])
+  }, [active, query, availableItems])
 
-  const activeCategoryName = categories.find(category => category.id === active)?.name || 'همه'
+  const activeCategoryName =
+    categories.find(category => category.id === active)?.name || 'همه'
+
+  const focusSearch = () => {
+    searchInputRef.current?.focus()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   if (loading) {
     return (
       <div className="loading-shell">
-        <div className="loading-line" />
-        <span>در حال آماده‌سازی منو…</span>
+        <div className="loading-mark"><span /></div>
+        <span>در حال آماده‌سازی</span>
       </div>
     )
   }
@@ -171,29 +175,16 @@ function App() {
 
   return (
     <div className="site-shell">
-      <div className="page-width">
-        <header className="topbar">
-          <div className="topbar-title">منو</div>
-          <button
-            type="button"
-            className="search-toggle"
-            onClick={() => searchInputRef.current?.focus()}
-            aria-label="جست‌وجو"
-          >
-            <Search size={19} />
-          </button>
+      <div className="menu-frame">
+        <header className="minimal-header">
+          <div className="header-rule" />
+          <span className="header-kicker">منو</span>
+          <div className="header-rule header-rule-right" />
         </header>
-
-        <section className="hero" aria-labelledby="menu-title">
-          <div className="hero-rule" />
-          <h1 id="menu-title">منو</h1>
-          <p>{allAvailableItems.length.toLocaleString('fa-IR')} آیتم</p>
-        </section>
 
         <main>
           <section className="controls" aria-label="جست‌وجو و دسته‌بندی">
             <label className="search-box">
-              <Search size={18} />
               <input
                 ref={searchInputRef}
                 value={query}
@@ -203,8 +194,13 @@ function App() {
                 inputMode="search"
               />
               {query && (
-                <button type="button" className="clear-search" onClick={() => setQuery('')} aria-label="پاک کردن جست‌وجو">
-                  <X size={16} />
+                <button
+                  type="button"
+                  className="clear-search"
+                  onClick={() => setQuery('')}
+                  aria-label="پاک کردن جست‌وجو"
+                >
+                  <X size={15} />
                 </button>
               )}
             </label>
@@ -214,7 +210,11 @@ function App() {
                 <button
                   key={category.id}
                   type="button"
-                  className={active === category.id ? 'category-button active' : 'category-button'}
+                  className={
+                    active === category.id
+                      ? 'category-button active'
+                      : 'category-button'
+                  }
                   onClick={() => setActive(category.id)}
                   aria-pressed={active === category.id}
                 >
@@ -226,41 +226,51 @@ function App() {
 
           <section className="section-head">
             <div>
-              <span>{query ? 'نتایج جست‌وجو' : 'انتخاب‌ها'}</span>
-              <h2>{query ? 'نتیجه‌های شما' : activeCategoryName}</h2>
+              <span>{query ? 'جست‌وجو' : 'انتخاب شما'}</span>
+              <h1>{query ? 'نتیجه‌ها' : activeCategoryName}</h1>
             </div>
             <small>{visibleItems.length.toLocaleString('fa-IR')} آیتم</small>
           </section>
 
           {visibleItems.length > 0 ? (
-            <section className="menu-list">
+            <section className="menu-list" aria-live="polite">
               {visibleItems.map((item, index) => (
-                <article className="menu-card" key={item.id} style={{ '--card-index': index }}>
-                  <button type="button" className="card-button" onClick={() => setSelectedItem(item)}>
+                <article
+                  className="menu-card"
+                  key={item.id}
+                  style={{ '--card-index': index }}
+                >
+                  <button
+                    type="button"
+                    className="card-button"
+                    onClick={() => setSelectedItem(item)}
+                    aria-label={`جزئیات ${item.name}`}
+                  >
                     <div className="card-image">
                       {item.image ? (
                         <img
                           src={imageUrl(item.image)}
                           alt=""
-                          loading={index < 2 ? 'eager' : 'lazy'}
+                          loading={index < 3 ? 'eager' : 'lazy'}
                           decoding="async"
                           fetchPriority={index === 0 ? 'high' : 'auto'}
                         />
                       ) : (
                         <div className="image-placeholder" aria-hidden="true">
-                          <span>{String(index + 1).padStart(2, '0')}</span>
+                          <span>منو</span>
                         </div>
                       )}
-                      <span className="image-link"><ArrowUpLeft size={16} /></span>
                     </div>
 
                     <div className="card-body">
                       <div className="card-topline">
-                        <h3>{item.name}</h3>
+                        <h2>{item.name}</h2>
                         <strong>{formatPrice(item.price, menu.currency)}</strong>
                       </div>
                       <p>{item.description}</p>
-                      <span className="card-category">{categoryMap[item.categoryId] || 'منو'}</span>
+                      <span className="card-category">
+                        {categoryMap[item.categoryId] || 'منو'}
+                      </span>
                     </div>
                   </button>
                 </article>
@@ -268,26 +278,42 @@ function App() {
             </section>
           ) : (
             <div className="empty-state">
-              <div className="empty-mark"><Search size={19} /></div>
               <strong>موردی پیدا نشد</strong>
-              <p>عبارت جست‌وجو یا دسته‌بندی دیگری را امتحان کنید.</p>
-              <button type="button" onClick={() => { setQuery(''); setActive('all') }}>نمایش همه</button>
+              <p>دسته‌بندی یا عبارت دیگری را امتحان کنید.</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setQuery('')
+                  setActive('all')
+                }}
+              >
+                نمایش همه
+              </button>
             </div>
           )}
         </main>
 
         {(menu.restaurant.phone || menu.restaurant.instagram) && (
           <footer className="footer">
-            <span>منو</span>
+            <button type="button" className="footer-caption" onClick={focusSearch}>
+              بازگشت به منو
+            </button>
+
             <div className="footer-actions">
               {menu.restaurant.phone && (
                 <a href={`tel:${menu.restaurant.phone}`} aria-label="تماس">
-                  <Phone size={17} />
+                  <Phone size={16} />
                 </a>
               )}
+
               {menu.restaurant.instagram && (
-                <a href={menu.restaurant.instagram} target="_blank" rel="noreferrer" aria-label="اینستاگرام">
-                  <Instagram size={17} />
+                <a
+                  href={menu.restaurant.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="اینستاگرام"
+                >
+                  <Instagram size={16} />
                 </a>
               )}
             </div>
@@ -296,27 +322,53 @@ function App() {
       </div>
 
       {selectedItem && (
-        <div className="modal-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) setSelectedItem(null) }}>
-          <article className="item-modal" role="dialog" aria-modal="true" aria-label={selectedItem.name}>
-            <button type="button" className="modal-close" onClick={() => setSelectedItem(null)} aria-label="بستن">
-              <X size={19} />
+        <div
+          className="modal-backdrop"
+          onMouseDown={event => {
+            if (event.target === event.currentTarget) setSelectedItem(null)
+          }}
+        >
+          <article
+            className="item-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={selectedItem.name}
+          >
+            <button
+              type="button"
+              className="modal-close"
+              onClick={() => setSelectedItem(null)}
+              aria-label="بستن"
+            >
+              <X size={18} />
             </button>
+
             <div className="modal-image">
               {selectedItem.image ? (
                 <img src={imageUrl(selectedItem.image)} alt="" decoding="async" />
               ) : (
-                <div className="modal-placeholder"><Utensils size={28} /><span>منو</span></div>
+                <div className="modal-placeholder"><span>منو</span></div>
               )}
             </div>
+
             <div className="modal-content">
-              <span className="modal-category">{categoryMap[selectedItem.categoryId] || 'منو'}</span>
+              <span className="modal-category">
+                {categoryMap[selectedItem.categoryId] || 'منو'}
+              </span>
+
               <div className="modal-title-row">
                 <h2>{selectedItem.name}</h2>
                 <strong>{formatPrice(selectedItem.price, menu.currency)}</strong>
               </div>
-              <p>{selectedItem.description}</p>
-              <button type="button" className="modal-done" onClick={() => setSelectedItem(null)}>
-                بستن <ChevronDown size={17} />
+
+              <p>{selectedItem.description || 'توضیحی برای این آیتم ثبت نشده است.'}</p>
+
+              <button
+                type="button"
+                className="modal-done"
+                onClick={() => setSelectedItem(null)}
+              >
+                بستن
               </button>
             </div>
           </article>
