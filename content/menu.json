@@ -16,6 +16,17 @@
   ],
   "items": [
     {
+      "id": "item-mug54q7w-hp4cl",
+      "categoryId": "desserts",
+      "name": "آیتم پیش فرض دو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 2
+    },
+    {
       "id": "item-mug53ulo-rqh4p",
       "categoryId": "desserts",
       "name": "آیتم پیش فرض",
@@ -27,5 +38,5 @@
       "sort": 1
     }
   ],
-  "updatedAt": "2026-09-24T23:05:41.021Z"
+  "updatedAt": "2026-09-24T23:06:14.558Z"
 }
