@@ -14,6 +14,18 @@
       "sort": 1
     }
   ],
-  "items": [],
-  "updatedAt": "2026-09-24T23:05:01.106Z"
+  "items": [
+    {
+      "id": "item-mug53ulo-rqh4p",
+      "categoryId": "desserts",
+      "name": "آیتم پیش فرض",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "content/images/mug54bcm-photo_1_2026-09-24_02-43-23.jpg",
+      "featured": false,
+      "available": true,
+      "sort": 1
+    }
+  ],
+  "updatedAt": "2026-09-24T23:05:41.021Z"
 }
