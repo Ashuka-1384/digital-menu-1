@@ -9,93 +9,11 @@
   "currency": "تومان",
   "categories": [
     {
-      "id": "starters",
-      "name": "پیش‌غذا",
-      "sort": 1
-    },
-    {
-      "id": "mains",
-      "name": "غذای اصلی",
-      "sort": 2
-    },
-    {
-      "id": "drinks",
-      "name": "نوشیدنی",
-      "sort": 3
-    },
-    {
       "id": "desserts",
-      "name": "دسر",
-      "sort": 4
-    }
-  ],
-  "items": [
-    {
-      "id": "item-mug51wro-dnc7z",
-      "categoryId": "starters",
-      "name": "آیتم جدید",
-      "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
-      "image": "content/images/mug522b8-photo_1_2026-09-24_02-43-23.jpg",
-      "featured": false,
-      "available": true,
-      "sort": 6
-    },
-    {
-      "id": "item-olive",
-      "categoryId": "starters",
-      "name": "زیتون مزه‌دار",
-      "description": "زیتون سبز، سبزی معطر، لیمو و روغن زیتون",
-      "price": 185000,
-      "image": "",
-      "featured": true,
-      "available": true,
-      "sort": 1
-    },
-    {
-      "id": "item-chicken",
-      "categoryId": "mains",
-      "name": "مرغ گریل شده",
-      "description": "مرغ گریل، سبزیجات فصلی و سس مخصوص سرآشپز",
-      "price": 395000,
-      "image": "",
-      "featured": true,
-      "available": true,
-      "sort": 1
-    },
-    {
-      "id": "item-pasta",
-      "categoryId": "mains",
-      "name": "پاستا آلفردو",
-      "description": "پاستای تازه، سس خامه‌ای، قارچ و پارمزان",
-      "price": 345000,
-      "image": "",
-      "featured": false,
-      "available": true,
-      "sort": 2
-    },
-    {
-      "id": "item-latte",
-      "categoryId": "drinks",
-      "name": "لاته",
-      "description": "اسپرسو با شیر بخار داده شده و فوم لطیف",
-      "price": 155000,
-      "image": "",
-      "featured": false,
-      "available": true,
-      "sort": 1
-    },
-    {
-      "id": "item-cheesecake",
-      "categoryId": "desserts",
-      "name": "چیزکیک سن‌سباستین",
-      "description": "بافت خامه‌ای، رویه برشته و شیرینی متعادل",
-      "price": 225000,
-      "image": "",
-      "featured": true,
-      "available": true,
+      "name": "دسته پیش فرض",
       "sort": 1
     }
   ],
-  "updatedAt": "2026-09-24T23:04:01.495Z"
+  "items": [],
+  "updatedAt": "2026-09-24T23:05:01.106Z"
 }
