@@ -21,6 +21,17 @@
   ],
   "items": [
     {
+      "id": "item-muh6jc8i-32bim",
+      "categoryId": "desserts",
+      "name": "آیتم جدید",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 4
+    },
+    {
       "id": "item-mug5tv0t-kfqgk",
       "categoryId": "category-mug5tsca-z22ab",
       "name": "آیتم پیش فرض سوم ",
@@ -54,5 +65,5 @@
       "sort": 1
     }
   ],
-  "updatedAt": "2026-09-24T23:26:56.072Z"
+  "updatedAt": "2026-09-25T16:33:10.574Z"
 }
