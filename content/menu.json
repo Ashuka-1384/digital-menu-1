@@ -17,9 +17,47 @@
       "id": "category-muigi9j3-p2vkp",
       "name": "بار گرم",
       "sort": 2
+    },
+    {
+      "id": "category-muigvinw-fow41",
+      "name": "بار سرد",
+      "sort": 3
     }
   ],
   "items": [
+    {
+      "id": "item-muigwmew-ppq0n",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "آیس ماکیاتو",
+      "description": "",
+      "price": 200,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 9
+    },
+    {
+      "id": "item-muigvxn8-lcr5y",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "آیس آمریکانو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 115,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 8
+    },
+    {
+      "id": "item-muigvkiz-tg3zc",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "موهیتو",
+      "description": "",
+      "price": 200,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 7
+    },
     {
       "id": "item-muigujf6-dpmnb",
       "categoryId": "category-muigi9j3-p2vkp",
@@ -87,5 +125,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-09-26T14:09:54.629Z"
+  "updatedAt": "2026-09-26T14:11:55.593Z"
 }
