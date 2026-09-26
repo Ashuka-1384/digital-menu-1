@@ -21,6 +21,28 @@
   ],
   "items": [
     {
+      "id": "item-muigkc08-3djt7",
+      "categoryId": "desserts",
+      "name": "چای ماسالا",
+      "description": "",
+      "price": 100,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 3
+    },
+    {
+      "id": "item-muigjt8i-80gcq",
+      "categoryId": "desserts",
+      "name": "چای گلاب ",
+      "description": "",
+      "price": 80,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 2
+    },
+    {
       "id": "item-muigj7t2-xnk7u",
       "categoryId": "desserts",
       "name": "چای کلاسیک ",
@@ -30,18 +52,7 @@
       "featured": false,
       "available": true,
       "sort": 2
-    },
-    {
-      "id": "item-muigiegr-u7fok",
-      "categoryId": "desserts",
-      "name": "چای کلاسیک",
-      "description": "",
-      "price": 70,
-      "image": "",
-      "featured": false,
-      "available": true,
-      "sort": 1
     }
   ],
-  "updatedAt": "2026-09-26T14:00:58.568Z"
+  "updatedAt": "2026-09-26T14:02:15.670Z"
 }
