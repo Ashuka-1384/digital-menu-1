@@ -21,6 +21,17 @@
   ],
   "items": [
     {
+      "id": "item-muigujf6-dpmnb",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "آمریکانو",
+      "description": "",
+      "price": 110,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 7
+    },
+    {
       "id": "item-muigtjgl-r02zd",
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "لاته",
@@ -76,5 +87,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-09-26T14:09:06.019Z"
+  "updatedAt": "2026-09-26T14:09:54.629Z"
 }
