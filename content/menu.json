@@ -10,43 +10,21 @@
   "categories": [
     {
       "id": "desserts",
-      "name": "دسته پیش فرض",
+      "name": "چای ها",
       "sort": 1
     },
     {
-      "id": "category-mug5tsca-z22ab",
-      "name": "دسته دوم",
+      "id": "category-muigi9j3-p2vkp",
+      "name": "بار گرم",
       "sort": 2
     }
   ],
   "items": [
     {
-      "id": "item-muh6jc8i-32bim",
+      "id": "item-muigj7t2-xnk7u",
       "categoryId": "desserts",
-      "name": "آیتم جدید",
-      "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
-      "image": "",
-      "featured": false,
-      "available": true,
-      "sort": 4
-    },
-    {
-      "id": "item-mug5tv0t-kfqgk",
-      "categoryId": "category-mug5tsca-z22ab",
-      "name": "آیتم پیش فرض سوم ",
-      "description": "متن برای تست اولیه",
-      "price": 100,
-      "image": "content/images/mug5v7q9-11199.jpg",
-      "featured": false,
-      "available": true,
-      "sort": 3
-    },
-    {
-      "id": "item-mug54q7w-hp4cl",
-      "categoryId": "desserts",
-      "name": "آیتم پیش فرض دو",
-      "description": "توضیحات آیتم را وارد کنید",
+      "name": "چای کلاسیک ",
+      "description": "",
       "price": 0,
       "image": "",
       "featured": false,
@@ -54,16 +32,16 @@
       "sort": 2
     },
     {
-      "id": "item-mug53ulo-rqh4p",
+      "id": "item-muigiegr-u7fok",
       "categoryId": "desserts",
-      "name": "آیتم پیش فرض",
-      "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
-      "image": "content/images/mug54bcm-photo_1_2026-09-24_02-43-23.jpg",
+      "name": "چای کلاسیک",
+      "description": "",
+      "price": 70,
+      "image": "",
       "featured": false,
       "available": true,
       "sort": 1
     }
   ],
-  "updatedAt": "2026-09-25T16:33:10.574Z"
+  "updatedAt": "2026-09-26T14:00:58.568Z"
 }
