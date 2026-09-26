@@ -22,9 +22,36 @@
       "id": "category-muigvinw-fow41",
       "name": "بار سرد",
       "sort": 3
+    },
+    {
+      "id": "category-muigxv95-bp674",
+      "name": "قلیان",
+      "sort": 4
     }
   ],
   "items": [
+    {
+      "id": "item-muigyj3p-f3zro",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "قلیان میوه‌ای",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 170,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 11
+    },
+    {
+      "id": "item-muigxxau-4x2ym",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "قلیان دوسیب",
+      "description": "",
+      "price": 150,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 10
+    },
     {
       "id": "item-muigwmew-ppq0n",
       "categoryId": "category-muigvinw-fow41",
@@ -125,5 +152,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-09-26T14:11:55.593Z"
+  "updatedAt": "2026-09-26T14:12:53.714Z"
 }
