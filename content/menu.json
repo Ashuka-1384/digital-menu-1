@@ -36,6 +36,17 @@
   ],
   "items": [
     {
+      "id": "item-mulq4jae-8n7t3",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "آیتم جدید",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 43
+    },
+    {
       "id": "item-mulq3nx7-1ud3c",
       "categoryId": "category-mulpuyok-duxv8",
       "name": "سیب یخ سری سیلیکونی",
@@ -425,7 +436,7 @@
       "categoryId": "category-muigvinw-fow41",
       "name": "موهیتو",
       "description": "",
-      "price": 200,
+      "price": 260,
       "image": "",
       "featured": false,
       "available": true,
@@ -436,7 +447,7 @@
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "آمریکانو",
       "description": "",
-      "price": 110,
+      "price": 210,
       "image": "",
       "featured": false,
       "available": true,
@@ -447,7 +458,7 @@
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "لاته",
       "description": "",
-      "price": 150,
+      "price": 250,
       "image": "",
       "featured": false,
       "available": true,
@@ -458,7 +469,7 @@
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "قهوه اسپرسو",
       "description": "",
-      "price": 120,
+      "price": 190,
       "image": "",
       "featured": false,
       "available": true,
@@ -476,17 +487,6 @@
       "sort": 3
     },
     {
-      "id": "item-muigjt8i-80gcq",
-      "categoryId": "desserts",
-      "name": "چای گلاب ",
-      "description": "",
-      "price": 80,
-      "image": "",
-      "featured": false,
-      "available": true,
-      "sort": 2
-    },
-    {
       "id": "item-muigj7t2-xnk7u",
       "categoryId": "desserts",
       "name": "چای کلاسیک ",
@@ -498,5 +498,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-09-28T20:52:28.274Z"
+  "updatedAt": "2026-09-28T20:54:49.458Z"
 }
