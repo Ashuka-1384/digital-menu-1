@@ -31,6 +31,105 @@
   ],
   "items": [
     {
+      "id": "item-mulondd4-fiuwt",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "آلبالو نعنا سری سیلیکونی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 350000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 23
+    },
+    {
+      "id": "item-mulomw4o-5d9sg",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "آلبالو نعنا سری کویتی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 450000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 22
+    },
+    {
+      "id": "item-mulom5fj-3cv9c",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "آلبالو نعنا سری عربی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 550000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 21
+    },
+    {
+      "id": "item-mulol3ii-khfq2",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "دوسیب شلیل سری سیلیکونی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 350000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 20
+    },
+    {
+      "id": "item-mulojzni-hpf8j",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "دوسیب شلیل سری کویتی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 450000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 19
+    },
+    {
+      "id": "item-muloj8gg-w9ga4",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "دوسیب شلیل سری عربی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 550000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 18
+    },
+    {
+      "id": "item-muloi7ca-552vo",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "دوسیب نعنا سری کویتی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 450000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 17
+    },
+    {
+      "id": "item-muloglxa-sg8mh",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "دوسیب نعنا سری عربی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 550000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 16
+    },
+    {
+      "id": "item-mulofgf8-5jw2h",
+      "categoryId": "category-muigxv95-bp674",
+      "name": "دوسیب آلبالو سری سیلیکونی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 350000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 15
+    },
+    {
       "id": "item-mujwg5bb-rf6di",
       "categoryId": "category-muigxv95-bp674",
       "name": "دوسیب آلبالو سری کویتی",
@@ -55,7 +154,7 @@
     {
       "id": "item-mujwdjj3-cy1th",
       "categoryId": "category-muigxv95-bp674",
-      "name": "قلیان دوسیب سیلیکونی",
+      "name": " دوسیب سری سیلیکونی",
       "description": "توضیحات آیتم را وارد کنید",
       "price": 350000,
       "image": "",
@@ -66,7 +165,7 @@
     {
       "id": "item-muigyj3p-f3zro",
       "categoryId": "category-muigxv95-bp674",
-      "name": "قلیان دوسیب  سری کویتی ",
+      "name": " دوسیب  سری کویتی ",
       "description": "توضیحات آیتم را وارد کنید",
       "price": 450000,
       "image": "",
@@ -77,8 +176,8 @@
     {
       "id": "item-muigxxau-4x2ym",
       "categoryId": "category-muigxv95-bp674",
-      "name": "قلیان دوسیب سری  عربی",
-      "description": "",
+      "name": " دوسیب سری  عربی",
+      "description": "میکس فاخر و نخل",
       "price": 550000,
       "image": "",
       "featured": false,
@@ -185,5 +284,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-09-27T14:15:30.974Z"
+  "updatedAt": "2026-09-28T20:11:48.901Z"
 }
