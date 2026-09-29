@@ -41,6 +41,17 @@
   ],
   "items": [
     {
+      "id": "item-mun0pn4e-ho9hg",
+      "categoryId": "category-mulpuyok-duxv8",
+      "name": "تمشک بستنی سری سیلیکونی",
+      "description": "مدت استفاده 45 دقیقه میباشد",
+      "price": 350000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 50
+    },
+    {
       "id": "item-mun0oi1u-0vjfe",
       "categoryId": "category-mulpuyok-duxv8",
       "name": "تمشک بستنی سری کویتی",
@@ -580,5 +591,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-09-29T18:36:35.177Z"
+  "updatedAt": "2026-09-29T18:37:18.473Z"
 }
