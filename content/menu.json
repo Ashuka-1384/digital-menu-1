@@ -32,15 +32,86 @@
       "id": "category-mulpuyok-duxv8",
       "name": "قلیان یخی",
       "sort": 5
+    },
+    {
+      "id": "category-mun0ctx5-shrk2",
+      "name": "طعم فانتزی",
+      "sort": 6
     }
   ],
   "items": [
     {
-      "id": "item-mulq4jae-8n7t3",
-      "categoryId": "category-muigxv95-bp674",
-      "name": "آیتم جدید",
+      "id": "item-mun0n3mv-u61gf",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "لاو سری سیلیکونی ",
+      "description": "مدت استفاده 45 دقیقه میباشد",
+      "price": 350000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 48
+    },
+    {
+      "id": "item-mun0lz9d-91zui",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "لاو سری کویتی ",
+      "description": "مدت استفاده 60 دقیقه میباشد",
+      "price": 450000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 47
+    },
+    {
+      "id": "item-mun0kz4u-2n3zs",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "لاو سری عربی",
+      "description": "مدت استفاده 1:30 دقیقه میباشد",
+      "price": 550000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 46
+    },
+    {
+      "id": "item-mun0jq24-e85s3",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شب های مسکو سری سیلیکونی ",
+      "description": "مدت استفاده 45 دقیقه میباشد",
+      "price": 350000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 45
+    },
+    {
+      "id": "item-mun0ij1g-o8q1n",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شب های مسکو سری کویتی",
+      "description": "مدت استفاده 60 دقیقه میباشد",
+      "price": 450000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 44
+    },
+    {
+      "id": "item-mun0hfcs-snbis",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شب های مسکو سری عربی",
+      "description": "مدت استفاده 1:30 دقیقه میباشد",
+      "price": 550000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 43
+    },
+    {
+      "id": "item-mun0czd2-pnso3",
+      "categoryId": "category-mulpuyok-duxv8",
+      "name": "تمشک بستنی سری عربی",
       "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
+      "price": 550000,
       "image": "",
       "featured": false,
       "available": true,
@@ -498,5 +569,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-09-28T20:54:49.458Z"
+  "updatedAt": "2026-09-29T18:35:37.930Z"
 }
