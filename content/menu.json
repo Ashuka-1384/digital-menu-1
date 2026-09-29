@@ -41,6 +41,17 @@
   ],
   "items": [
     {
+      "id": "item-mun0oi1u-0vjfe",
+      "categoryId": "category-mulpuyok-duxv8",
+      "name": "تمشک بستنی سری کویتی",
+      "description": "مدت استفاده 60 دقیقه میباشد",
+      "price": 450000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 49
+    },
+    {
       "id": "item-mun0n3mv-u61gf",
       "categoryId": "category-mun0ctx5-shrk2",
       "name": "لاو سری سیلیکونی ",
@@ -569,5 +580,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-09-29T18:35:37.930Z"
+  "updatedAt": "2026-09-29T18:36:30.669Z"
 }
