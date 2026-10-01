@@ -41,6 +41,17 @@
   ],
   "items": [
     {
+      "id": "item-muq2kre5-nsfqa",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شیخ مانی (سری عربی)",
+      "description": "مدت استفاده از قلیان 1:30 دقیقه میباشد",
+      "price": 550000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 54
+    },
+    {
       "id": "item-mun0u4d0-jgvxh",
       "categoryId": "category-mun0ctx5-shrk2",
       "name": "دژاوو سری سیلیکونی ",
@@ -624,5 +635,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-09-29T18:40:55.175Z"
+  "updatedAt": "2026-10-01T21:53:44.524Z"
 }
