@@ -41,6 +41,105 @@
   ],
   "items": [
     {
+      "id": "item-mux3igpq-0avms",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "لیموناد ",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 78
+    },
+    {
+      "id": "item-mux3i6ev-ou8ql",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "بلو موهیتو ",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 77
+    },
+    {
+      "id": "item-mux3hwoj-bf8ph",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "ویکتوریا",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 76
+    },
+    {
+      "id": "item-mux3hon3-vppn8",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "بلک موهیتو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 75
+    },
+    {
+      "id": "item-mux3hfj1-sk4ns",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "موهیتو توت فرنگی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 74
+    },
+    {
+      "id": "item-mux3gj3k-w1xq4",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "موهیتو برزیلی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 73
+    },
+    {
+      "id": "item-mux3ga7t-oszi8",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "آیس موکا",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 72
+    },
+    {
+      "id": "item-mux3fv1b-tjwsc",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "آیس کارامل ماکیاتو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 71
+    },
+    {
+      "id": "item-mux3fidr-w14xm",
+      "categoryId": "category-muigvinw-fow41",
+      "name": "آیس لته ",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 70
+    },
+    {
       "id": "item-mux362z9-9q8mh",
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "کمکس",
@@ -800,5 +899,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-10-06T19:44:23.060Z"
+  "updatedAt": "2026-10-06T19:53:40.196Z"
 }
