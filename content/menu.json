@@ -41,6 +41,127 @@
   ],
   "items": [
     {
+      "id": "item-mux362z9-9q8mh",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "کمکس",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 69
+    },
+    {
+      "id": "item-mux35pve-3ufrn",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "اسپرسو ماکیاتو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 68
+    },
+    {
+      "id": "item-mux35ehl-3hhav",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "کارامل ماکیاتو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 67
+    },
+    {
+      "id": "item-mux34ty3-1rho1",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "فرانسه",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 66
+    },
+    {
+      "id": "item-mux34jdt-khr6i",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "ترک",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 65
+    },
+    {
+      "id": "item-mux34bo4-iwexz",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "نسکافه",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 64
+    },
+    {
+      "id": "item-mux3447b-ca7f3",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "چاکلت",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 63
+    },
+    {
+      "id": "item-mux33q41-8ot4d",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "موکا",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 62
+    },
+    {
+      "id": "item-mux336ct-4wzzd",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "کاپوچینو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 61
+    },
+    {
+      "id": "item-mux32nj4-hhwtu",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "لانگو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 60
+    },
+    {
+      "id": "item-mux2zvd3-kr38s",
+      "categoryId": "category-muigi9j3-p2vkp",
+      "name": "ریسترتو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 59
+    },
+    {
       "id": "item-mux171rc-8vknu",
       "categoryId": "desserts",
       "name": "چای اسپیشیالیتی",
@@ -679,5 +800,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-10-06T18:48:40.150Z"
+  "updatedAt": "2026-10-06T19:44:23.060Z"
 }
