@@ -37,9 +37,227 @@
       "id": "category-mun0ctx5-shrk2",
       "name": "طعم فانتزی",
       "sort": 6
+    },
+    {
+      "id": "category-mux3udao-gukkr",
+      "name": "انواع شیک",
+      "sort": 7
+    },
+    {
+      "id": "category-mux3uk2e-oatnl",
+      "name": "انواع اسموتی",
+      "sort": 8
+    },
+    {
+      "id": "category-mux3ur4b-bem16",
+      "name": "دسر",
+      "sort": 9
+    },
+    {
+      "id": "category-mux3uvlp-8gima",
+      "name": "فست فود",
+      "sort": 10
     }
   ],
   "items": [
+    {
+      "id": "item-mux3zjf9-ybx8t",
+      "categoryId": "category-mux3uvlp-8gima",
+      "name": "سیب زمینی تنوری",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 96
+    },
+    {
+      "id": "item-mux3z6lz-8ysie",
+      "categoryId": "category-mux3uvlp-8gima",
+      "name": "سیب زمینی سرخ کرده ",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 95
+    },
+    {
+      "id": "item-mux3yvvy-rhohg",
+      "categoryId": "category-mux3uvlp-8gima",
+      "name": "استیک تام و جری",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 94
+    },
+    {
+      "id": "item-mux3ynwe-xjp9c",
+      "categoryId": "category-mux3uvlp-8gima",
+      "name": "برگر رویال",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 93
+    },
+    {
+      "id": "item-mux3yeec-tdw79",
+      "categoryId": "category-mux3uvlp-8gima",
+      "name": "چیکن استیک",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 92
+    },
+    {
+      "id": "item-mux3xzrk-mxxct",
+      "categoryId": "category-mux3uvlp-8gima",
+      "name": "پاستا آلفردو ",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 91
+    },
+    {
+      "id": "item-mux3xrig-x62em",
+      "categoryId": "category-mux3uvlp-8gima",
+      "name": "پیتزا پپرونی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 90
+    },
+    {
+      "id": "item-mux3xk5x-0fk68",
+      "categoryId": "category-mux3uvlp-8gima",
+      "name": "پیتزا مخلوط ",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 89
+    },
+    {
+      "id": "item-mux3x9wq-r2742",
+      "categoryId": "category-mux3ur4b-bem16",
+      "name": "کیک خیس",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 88
+    },
+    {
+      "id": "item-mux3x076-v1kxd",
+      "categoryId": "category-mux3uk2e-oatnl",
+      "name": "اسموتی انبه",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 87
+    },
+    {
+      "id": "item-mux3wm8x-q7v7e",
+      "categoryId": "category-mux3uk2e-oatnl",
+      "name": "اسموتی آناناس",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 86
+    },
+    {
+      "id": "item-mux3waw6-jkg79",
+      "categoryId": "category-mux3uk2e-oatnl",
+      "name": "اسموتی موز",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 85
+    },
+    {
+      "id": "item-mux3w2e4-ltp68",
+      "categoryId": "category-mux3uk2e-oatnl",
+      "name": "اسموتی توت فرنگی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 84
+    },
+    {
+      "id": "item-mux3vv8w-vhtoq",
+      "categoryId": "category-mux3udao-gukkr",
+      "name": "شیک قهوه",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 83
+    },
+    {
+      "id": "item-mux3vo1x-bmlrm",
+      "categoryId": "category-mux3udao-gukkr",
+      "name": "شیک مارشمالو",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 82
+    },
+    {
+      "id": "item-mux3vgi2-yqcbd",
+      "categoryId": "category-mux3udao-gukkr",
+      "name": "شیک توت فرنگی",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 81
+    },
+    {
+      "id": "item-mux3v8vi-4gcjp",
+      "categoryId": "category-mux3udao-gukkr",
+      "name": "شیک نوتلا",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 80
+    },
+    {
+      "id": "item-mux3uzth-3312i",
+      "categoryId": "category-mux3udao-gukkr",
+      "name": "شیک موز",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 79
+    },
     {
       "id": "item-mux3igpq-0avms",
       "categoryId": "category-muigvinw-fow41",
@@ -899,5 +1117,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-10-06T19:53:40.196Z"
+  "updatedAt": "2026-10-06T20:06:23.310Z"
 }
