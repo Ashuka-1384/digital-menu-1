@@ -41,6 +41,28 @@
   ],
   "items": [
     {
+      "id": "item-mux15ub8-fk7mm",
+      "categoryId": "desserts",
+      "name": "چای هل",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 56
+    },
+    {
+      "id": "item-mux150ay-vpj4f",
+      "categoryId": "desserts",
+      "name": "چای گلاب",
+      "description": "توضیحات آیتم را وارد کنید",
+      "price": 0,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 55
+    },
+    {
       "id": "item-muq2kre5-nsfqa",
       "categoryId": "category-mun0ctx5-shrk2",
       "name": "شیخ مانی (سری عربی)",
@@ -635,5 +657,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-10-06T05:38:16.720Z"
+  "updatedAt": "2026-10-06T18:47:21.122Z"
 }
