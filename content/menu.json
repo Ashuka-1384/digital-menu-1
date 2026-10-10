@@ -373,7 +373,7 @@
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "اسپرسو ماکیاتو",
       "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
+      "price": 265000,
       "image": "",
       "featured": false,
       "available": true,
@@ -384,7 +384,7 @@
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "کارامل ماکیاتو",
       "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
+      "price": 265000,
       "image": "",
       "featured": false,
       "available": true,
@@ -417,7 +417,7 @@
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "نسکافه",
       "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
+      "price": 240000,
       "image": "",
       "featured": false,
       "available": true,
@@ -428,7 +428,7 @@
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "چاکلت",
       "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
+      "price": 250000,
       "image": "",
       "featured": false,
       "available": true,
@@ -439,7 +439,7 @@
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "موکا",
       "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
+      "price": 250000,
       "image": "",
       "featured": false,
       "available": true,
@@ -450,7 +450,7 @@
       "categoryId": "category-muigi9j3-p2vkp",
       "name": "کاپوچینو",
       "description": "توضیحات آیتم را وارد کنید",
-      "price": 0,
+      "price": 250000,
       "image": "",
       "featured": false,
       "available": true,
@@ -1117,5 +1117,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-10-10T17:32:59.969Z"
+  "updatedAt": "2026-10-10T17:34:18.666Z"
 }
