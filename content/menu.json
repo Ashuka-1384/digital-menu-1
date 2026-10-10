@@ -1099,7 +1099,7 @@
       "categoryId": "desserts",
       "name": "چای ماسالا",
       "description": "",
-      "price": 100,
+      "price": 220000,
       "image": "",
       "featured": false,
       "available": true,
@@ -1108,14 +1108,14 @@
     {
       "id": "item-muigj7t2-xnk7u",
       "categoryId": "desserts",
-      "name": "چای کلاسیک ",
+      "name": "چای کلاسیک /همراه ۲ عدد باقلوا ",
       "description": "",
-      "price": 80,
+      "price": 80000,
       "image": "",
       "featured": false,
       "available": true,
       "sort": 2
     }
   ],
-  "updatedAt": "2026-10-06T20:06:23.310Z"
+  "updatedAt": "2026-10-10T17:32:59.969Z"
 }
