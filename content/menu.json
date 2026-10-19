@@ -61,6 +61,105 @@
   ],
   "items": [
     {
+      "id": "item-mvfgm63a-9vrgm",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شب های بغدادی سری سیلیکونی",
+      "description": "مدت استفاده ۴۵ دقیقه می باشد",
+      "price": 350000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 105
+    },
+    {
+      "id": "item-mvfgl18q-s0pq5",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شب های بغدادی سری کویتی",
+      "description": "مدت استفاده ۶۰ دقیقه می باشد",
+      "price": 450000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 104
+    },
+    {
+      "id": "item-mvfgk092-ljpl9",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شب های بغدادی سری عربی",
+      "description": "مدت استفاده ۱:۳۰ دقیقه می باشد",
+      "price": 550000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 103
+    },
+    {
+      "id": "item-mvfgimkg-vd2cq",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شب های ازمیر سری سیلیکونی",
+      "description": "مدت استفاده ۴۵ دقیقه می باشد",
+      "price": 350000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 102
+    },
+    {
+      "id": "item-mvfghvms-yutvx",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شب های ازمیر سری کویتی",
+      "description": "مدت استفاده ۶۰ دقیقه می باشد",
+      "price": 450000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 101
+    },
+    {
+      "id": "item-mvfggd2a-hhxr4",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شب های  ازمیر سری عربی",
+      "description": "مدت استفاده ۱:۳۰ دقیقه می باشد",
+      "price": 550000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 100
+    },
+    {
+      "id": "item-mvfgeyx1-fu2g3",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شهریار سری سیلیکونی",
+      "description": "مدت استفاده ۴۵ دقیقه می باشد",
+      "price": 350000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 99
+    },
+    {
+      "id": "item-mvfgdsg2-8ijuv",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شهریار سری کویتی",
+      "description": "مدت استفاده ۶۰ دقیقه می باشد",
+      "price": 450000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 98
+    },
+    {
+      "id": "item-mvfgcmoh-76i3d",
+      "categoryId": "category-mun0ctx5-shrk2",
+      "name": "شهریار سری عربی",
+      "description": "مدت استفاده ۱:۳۰ دقیقه می باشد",
+      "price": 550000,
+      "image": "",
+      "featured": false,
+      "available": true,
+      "sort": 97
+    },
+    {
       "id": "item-mux3zjf9-ybx8t",
       "categoryId": "category-mux3uvlp-8gima",
       "name": "سیب زمینی تنوری",
@@ -75,8 +174,8 @@
       "id": "item-mux3z6lz-8ysie",
       "categoryId": "category-mux3uvlp-8gima",
       "name": "سیب زمینی سرخ کرده ",
-      "description": "توضیحات آیتم را وارد کنید",
-      "price": 380000,
+      "description": "400 گرم سیب زمینی/همراه با ادویه مخصوص",
+      "price": 400000,
       "image": "",
       "featured": false,
       "available": true,
@@ -90,7 +189,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 94
     },
     {
@@ -101,7 +200,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 93
     },
     {
@@ -112,7 +211,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 92
     },
     {
@@ -123,7 +222,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 91
     },
     {
@@ -134,7 +233,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 90
     },
     {
@@ -145,7 +244,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 89
     },
     {
@@ -530,7 +629,7 @@
       "price": 550000,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 54
     },
     {
@@ -1117,5 +1216,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-10-10T19:26:58.618Z"
+  "updatedAt": "2026-10-19T16:21:52.925Z"
 }
