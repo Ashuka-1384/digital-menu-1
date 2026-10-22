@@ -233,7 +233,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 87
     },
     {
@@ -244,7 +244,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 86
     },
     {
@@ -255,7 +255,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 85
     },
     {
@@ -266,7 +266,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 84
     },
     {
@@ -1040,5 +1040,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-10-22T18:27:56.952Z"
+  "updatedAt": "2026-10-22T18:29:04.255Z"
 }
