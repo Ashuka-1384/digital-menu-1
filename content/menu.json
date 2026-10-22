@@ -134,7 +134,7 @@
       "price": 0,
       "image": "",
       "featured": false,
-      "available": true,
+      "available": false,
       "sort": 96
     },
     {
@@ -217,7 +217,7 @@
     {
       "id": "item-mux3x9wq-r2742",
       "categoryId": "category-mux3ur4b-bem16",
-      "name": "کیک خیس",
+      "name": "کیک روز ",
       "description": "توضیحات آیتم را وارد کنید",
       "price": 250000,
       "image": "",
@@ -1040,5 +1040,5 @@
       "sort": 2
     }
   ],
-  "updatedAt": "2026-10-22T18:29:04.255Z"
+  "updatedAt": "2026-10-22T18:29:38.174Z"
 }
