@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { ChevronDown, ChevronUp, ImagePlus, Pencil, Plus, Trash2, X } from 'lucide-react'
-import { BUCKET, loadMenuData, storagePathFromUrl, supabase, uid } from './supabase'
+import { BUCKET, explainError, loadMenuData, storagePathFromUrl, supabase, uid } from './supabase'
 
 const toLatin = s =>
   String(s ?? '')
@@ -65,7 +65,7 @@ export default function Admin({ onClose, onLock, onChanged }) {
     try {
       setData(await loadMenuData())
     } catch (e) {
-      setError('خطا در خواندن اطلاعات: ' + (e.message || e))
+      setError(explainError(e))
     }
   }, [])
 
@@ -80,7 +80,7 @@ export default function Admin({ onClose, onLock, onChanged }) {
       await reload()
       onChanged?.()
     } catch (e) {
-      setError('خطا: ' + (e.message || e))
+      setError(explainError(e))
     } finally {
       setBusy(false)
     }
@@ -89,7 +89,10 @@ export default function Admin({ onClose, onLock, onChanged }) {
   if (!data) {
     return (
       <div className="adm-backdrop">
-        <div className="adm-panel adm-center">{error || 'در حال بارگذاری…'}</div>
+        <div className="adm-panel adm-center">
+          <p className="adm-pre">{error || 'در حال بارگذاری…'}</p>
+          {error && <button type="button" className="adm-secondary" onClick={onClose}>بستن</button>}
+        </div>
       </div>
     )
   }

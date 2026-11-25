@@ -2,7 +2,7 @@ import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'rea
 import { createRoot } from 'react-dom/client'
 import { Instagram, KeyRound, Phone, X } from 'lucide-react'
 import './styles.css'
-import { ADMIN_PASSWORD, loadMenuData } from './supabase'
+import { ADMIN_PASSWORD, explainError, loadMenuData } from './supabase'
 
 const Admin = lazy(() => import('./Admin.jsx'))
 
@@ -44,7 +44,7 @@ async function fetchFallback() {
   return json.data || json
 }
 
-function AdminLogin({ onSuccess, onCancel }) {
+function AdminLogin({ onSuccess, onCancel, dbError }) {
   const [value, setValue] = useState('')
   const [wrong, setWrong] = useState(false)
   const submit = () => {
@@ -64,6 +64,7 @@ function AdminLogin({ onSuccess, onCancel }) {
           onKeyDown={e => e.key === 'Enter' && submit()}
         />
         {wrong && <span className="adm-wrong">رمز اشتباه است</span>}
+        {dbError && <p className="adm-error adm-pre">اتصال به دیتابیس برقرار نیست:{'\n'}{dbError}</p>}
         <div className="adm-foot">
           <button type="button" className="adm-secondary" onClick={onCancel}>انصراف</button>
           <button type="button" className="adm-primary" onClick={submit}>ورود</button>
@@ -83,6 +84,7 @@ function App() {
   const [showLogin, setShowLogin] = useState(false)
   const [showAdmin, setShowAdmin] = useState(false)
   const refreshRef = useRef(null)
+  const [dbError, setDbError] = useState('')
 
   useEffect(() => {
     let alive = true
@@ -107,7 +109,10 @@ function App() {
       inFlight = (async () => {
         try {
           applyMenu(await loadMenuData())
-        } catch {
+          if (alive) setDbError('')
+        } catch (err) {
+          console.error('Supabase error:', err)
+          if (alive) setDbError(explainError(err))
           const cached = readCachedMenu()
           if (cached) applyMenu(cached)
           else {
@@ -196,10 +201,7 @@ function App() {
   return (
     <div className="site-shell">
       <div className="menu-frame">
-        <header className="menu-top">
-          <span className="top-line" aria-hidden="true" />
-          <span className="top-diamond" aria-hidden="true" />
-          <span className="top-line" aria-hidden="true" />
+        <header className="hero">
           <button
             type="button"
             className={isAdmin ? 'admin-key unlocked' : 'admin-key'}
@@ -208,6 +210,10 @@ function App() {
           >
             <KeyRound size={15} />
           </button>
+          <span className="hero-orn" aria-hidden="true"><i /></span>
+          <div className="hero-title">{menu.restaurant.name || 'منو'}</div>
+          {menu.restaurant.tagline && <p className="hero-tag">{menu.restaurant.tagline}</p>}
+          <span className="hero-orn" aria-hidden="true"><i /></span>
         </header>
 
         <nav className="category-strip" aria-label="دسته‌بندی‌ها">
@@ -391,6 +397,7 @@ function App() {
       )}
       {showLogin && (
         <AdminLogin
+          dbError={dbError}
           onCancel={() => setShowLogin(false)}
           onSuccess={() => {
             localStorage.setItem(ADMIN_KEY, '1')
