@@ -1,14 +1,14 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { Instagram, Phone, X } from 'lucide-react'
+import { Instagram, KeyRound, Phone, X } from 'lucide-react'
 import './styles.css'
-import { CONTENT_RAW_BASE } from './site-config'
+import { ADMIN_PASSWORD, loadMenuData } from './supabase'
+
+const Admin = lazy(() => import('./Admin.jsx'))
 
 const FALLBACK = '/fallback-menu.json'
-const MENU_API = '/api/menu'
-const RAW_BASE = CONTENT_RAW_BASE.replace(/\/$/, '')
-const CACHE_KEY = 'digital-menu-cache-v7'
-const REQUEST_TIMEOUT = 4500
+const CACHE_KEY = 'digital-menu-cache-v8'
+const ADMIN_KEY = 'digital-menu-admin'
 const MIN_REFRESH_GAP = 3000
 
 function formatPrice(value, currency = 'تومان') {
@@ -16,12 +16,7 @@ function formatPrice(value, currency = 'تومان') {
   return `${numeric.toLocaleString('fa-IR')} ${currency}`
 }
 
-function imageUrl(path) {
-  if (!path) return ''
-  if (/^https?:\/\//.test(path)) return path
-  const clean = String(path).replace(/^\//, '').replace(/^content\//, '')
-  return RAW_BASE ? `${RAW_BASE}/${clean}` : `/content/${clean}`
-}
+const imageUrl = path => path || ''
 
 function readCachedMenu() {
   try {
@@ -42,21 +37,40 @@ function writeCachedMenu(data) {
   }
 }
 
-async function fetchJson(url, options = {}) {
-  const controller = new AbortController()
-  const timer = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT)
+async function fetchFallback() {
+  const response = await fetch(FALLBACK, { cache: 'force-cache' })
+  if (!response.ok) throw new Error('fallback failed')
+  const json = await response.json()
+  return json.data || json
+}
 
-  try {
-    const response = await fetch(url, {
-      headers: { Accept: 'application/json', ...(options.headers || {}) },
-      ...options,
-      signal: controller.signal,
-    })
-    if (!response.ok) throw new Error(`HTTP ${response.status}`)
-    return await response.json()
-  } finally {
-    window.clearTimeout(timer)
+function AdminLogin({ onSuccess, onCancel }) {
+  const [value, setValue] = useState('')
+  const [wrong, setWrong] = useState(false)
+  const submit = () => {
+    if (value === ADMIN_PASSWORD) onSuccess()
+    else setWrong(true)
   }
+  return (
+    <div className="adm-backdrop" onMouseDown={e => e.target === e.currentTarget && onCancel()}>
+      <div className="adm-login" dir="rtl">
+        <h2>ورود ادمین</h2>
+        <input
+          autoFocus
+          type="password"
+          value={value}
+          placeholder="رمز عبور"
+          onChange={e => { setValue(e.target.value); setWrong(false) }}
+          onKeyDown={e => e.key === 'Enter' && submit()}
+        />
+        {wrong && <span className="adm-wrong">رمز اشتباه است</span>}
+        <div className="adm-foot">
+          <button type="button" className="adm-secondary" onClick={onCancel}>انصراف</button>
+          <button type="button" className="adm-primary" onClick={submit}>ورود</button>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function App() {
@@ -65,6 +79,10 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [selectedItem, setSelectedItem] = useState(null)
   const categoryRefs = useRef({})
+  const [isAdmin, setIsAdmin] = useState(() => localStorage.getItem(ADMIN_KEY) === '1')
+  const [showLogin, setShowLogin] = useState(false)
+  const [showAdmin, setShowAdmin] = useState(false)
+  const refreshRef = useRef(null)
 
   useEffect(() => {
     let alive = true
@@ -81,23 +99,23 @@ function App() {
       writeCachedMenu(next)
     }
 
-    const refresh = async () => {
+    const refresh = async (force = false) => {
       const now = Date.now()
-      if (inFlight || now - lastRefreshAt < MIN_REFRESH_GAP) return
+      if (inFlight || (!force && now - lastRefreshAt < MIN_REFRESH_GAP)) return
       lastRefreshAt = now
 
       inFlight = (async () => {
         try {
-          const response = await fetchJson(MENU_API, { cache: 'no-store' })
-          applyMenu(response.data || response)
+          applyMenu(await loadMenuData())
         } catch {
-          try {
-            const fallback = await fetchJson(FALLBACK, { cache: 'force-cache' })
-            applyMenu(fallback.data || fallback)
-          } catch {
-            const cached = readCachedMenu()
-            if (cached) applyMenu(cached)
-            else if (alive) setLoading(false)
+          const cached = readCachedMenu()
+          if (cached) applyMenu(cached)
+          else {
+            try {
+              applyMenu(await fetchFallback())
+            } catch {
+              if (alive) setLoading(false)
+            }
           }
         } finally {
           inFlight = null
@@ -113,8 +131,9 @@ function App() {
       setLoading(false)
     }
 
+    refreshRef.current = () => refresh(true)
     refresh()
-    const timer = window.setInterval(refresh, 60000)
+    const timer = window.setInterval(() => refresh(), 60000)
 
     return () => {
       alive = false
@@ -177,10 +196,18 @@ function App() {
   return (
     <div className="site-shell">
       <div className="menu-frame">
-        <header className="menu-top" aria-hidden="true">
-          <span className="top-line" />
-          <span className="top-diamond" />
-          <span className="top-line" />
+        <header className="menu-top">
+          <span className="top-line" aria-hidden="true" />
+          <span className="top-diamond" aria-hidden="true" />
+          <span className="top-line" aria-hidden="true" />
+          <button
+            type="button"
+            className={isAdmin ? 'admin-key unlocked' : 'admin-key'}
+            onClick={() => (isAdmin ? setShowAdmin(true) : setShowLogin(true))}
+            aria-label="ورود ادمین"
+          >
+            <KeyRound size={15} />
+          </button>
         </header>
 
         <nav className="category-strip" aria-label="دسته‌بندی‌ها">
@@ -361,6 +388,31 @@ function App() {
             </div>
           </article>
         </div>
+      )}
+      {showLogin && (
+        <AdminLogin
+          onCancel={() => setShowLogin(false)}
+          onSuccess={() => {
+            localStorage.setItem(ADMIN_KEY, '1')
+            setIsAdmin(true)
+            setShowLogin(false)
+            setShowAdmin(true)
+          }}
+        />
+      )}
+
+      {showAdmin && (
+        <Suspense fallback={null}>
+          <Admin
+            onClose={() => setShowAdmin(false)}
+            onChanged={() => refreshRef.current?.()}
+            onLock={() => {
+              localStorage.removeItem(ADMIN_KEY)
+              setIsAdmin(false)
+              setShowAdmin(false)
+            }}
+          />
+        </Suspense>
       )}
     </div>
   )
