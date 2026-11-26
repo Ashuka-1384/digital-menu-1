@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { ChevronDown, ChevronUp, ImagePlus, Pencil, Plus, Trash2, X } from 'lucide-react'
+import { ArrowRightLeft, ChevronDown, ChevronUp, ImagePlus, Pencil, Plus, Trash2, X } from 'lucide-react'
 import { BUCKET, explainError, loadMenuData, storagePathFromUrl, supabase, uid } from './supabase'
 
 const toLatin = s =>
@@ -60,6 +60,7 @@ export default function Admin({ onClose, onLock, onChanged }) {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [editing, setEditing] = useState(null) // آیتم در حال ویرایش/افزودن
+  const [moving, setMoving] = useState(null) // آیتم در حال انتقال به دسته دیگر
 
   const reload = useCallback(async () => {
     try {
@@ -152,6 +153,16 @@ export default function Admin({ onClose, onLock, onChanged }) {
   }
 
   /* ---------- آیتم‌ها ---------- */
+  const moveItemToCategory = (item, catId) => {
+    setMoving(null)
+    run(async () => {
+      const target = itemsOf(catId)
+      const sort = (target.length ? Math.max(...target.map(i => Number(i.sort || 0))) : 0) + 1
+      const { error: e } = await supabase.from('items').upsert(itemRow({ ...item, categoryId: catId }, sort))
+      if (e) throw e
+    })
+  }
+
   const deleteItem = item => {
     if (!window.confirm(`«${item.name}» حذف شود؟`)) return
     run(async () => {
@@ -265,6 +276,9 @@ export default function Admin({ onClose, onLock, onChanged }) {
                           <button type="button" disabled={idx === list.length - 1} onClick={() => moveItem(cat.id, idx, 1)} aria-label="پایین">
                             <ChevronDown size={17} />
                           </button>
+                          <button type="button" disabled={categories.length < 2} onClick={() => setMoving(item)} aria-label="انتقال به دسته دیگر" title="انتقال به دسته دیگر">
+                            <ArrowRightLeft size={16} />
+                          </button>
                           <button type="button" onClick={() => setEditing({ ...item })} aria-label="ویرایش">
                             <Pencil size={16} />
                           </button>
@@ -281,6 +295,25 @@ export default function Admin({ onClose, onLock, onChanged }) {
           )}
         </div>
       </div>
+
+      {moving && (
+        <div className="adm-backdrop adm-over" onMouseDown={e => e.target === e.currentTarget && setMoving(null)}>
+          <div className="adm-login" dir="rtl">
+            <h2>انتقال «{moving.name}»</h2>
+            <p className="adm-hint">به کدام دسته منتقل شود؟</p>
+            <div className="adm-movelist">
+              {categories.filter(c => c.id !== moving.categoryId).map(c => (
+                <button type="button" key={c.id} onClick={() => moveItemToCategory(moving, c.id)}>
+                  {c.name}
+                </button>
+              ))}
+            </div>
+            <div className="adm-foot">
+              <button type="button" className="adm-secondary" onClick={() => setMoving(null)}>انصراف</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {editing && (
         <ItemForm

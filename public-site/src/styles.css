@@ -1269,3 +1269,11 @@ body {
 
 .adm-pre { white-space: pre-line; line-height: 1.9; font-size: 12.5px; text-align: right; }
 .adm-center .adm-secondary { margin-top: 12px; }
+
+.adm-movelist { display: grid; gap: 6px; max-height: 50vh; overflow-y: auto; }
+.adm-movelist button {
+  min-height: 44px; padding: 0 14px; border-radius: 12px; text-align: right;
+  background: #fff; border: 1px solid var(--line-strong);
+  font-size: 14px; font-weight: 800; color: var(--green-deep); cursor: pointer;
+}
+.adm-movelist button:hover { background: rgba(184,154,91,.14); border-color: var(--gold); }
